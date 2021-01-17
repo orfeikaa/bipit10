@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище BIPIT3Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Arenda">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_fio" Type="int" />
+    <Property Name="Id_avto" Type="int" />
+    <Property Name="Data_take" Type="date" />
+    <Property Name="Data_re" Type="date" />
+  </EntityType>
+  <EntityType Name="Avto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Firm" Type="varchar" MaxLength="50" />
+    <Property Name="Model" Type="varchar" MaxLength="50" />
+    <Property Name="Cost_avto" Type="int" />
+  </EntityType>
+  <EntityType Name="FIO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO" Type="varchar" MaxLength="50" />
+    <Property Name="Data" Type="date" />
+    <Property Name="Tel" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Arenda_Avto">
+    <End Role="Avto" Type="Self.Avto" Multiplicity="0..1" />
+    <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Avto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Arenda">
+        <PropertyRef Name="Id_avto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Arenda_FIO">
+    <End Role="FIO" Type="Self.FIO" Multiplicity="0..1" />
+    <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Arenda">
+        <PropertyRef Name="Id_fio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище BIPIT3ModelContainer">
+    <EntitySet Name="Arenda" EntityType="Self.Arenda" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Avto" EntityType="Self.Avto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FIO" EntityType="Self.FIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Arenda_Avto" Association="Self.FK_Arenda_Avto">
+      <End Role="Avto" EntitySet="Avto" />
+      <End Role="Arenda" EntitySet="Arenda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Arenda_FIO" Association="Self.FK_Arenda_FIO">
+      <End Role="FIO" EntitySet="FIO" />
+      <End Role="Arenda" EntitySet="Arenda" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

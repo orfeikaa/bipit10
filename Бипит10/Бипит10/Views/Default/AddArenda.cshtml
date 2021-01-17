@@ -1,0 +1,29 @@
+﻿@model Arenda
+@{
+    ViewBag.Title = "AddArenda";
+}
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.LabelFor(model => model.FIO.FIO1, "ФИО")
+        <br />
+        @Html.DropDownListFor(model => model.Id_fio, ViewBag.FIO as SelectList)
+        <br />
+        @Html.LabelFor(model => model.Avto.Model, "Модель")
+        <br />
+        @Html.DropDownListFor(model => model.Id_avto, ViewBag.Avto as SelectList)
+        <br />
+        @Html.LabelFor(model => model.Data_take, "Дата начало аренды")
+        <br />
+        @Html.EditorFor(model => model.Data_take)
+        <br />
+        @Html.LabelFor(model => model.Data_re, "Дата конца аренды")
+        <br />
+        @Html.EditorFor(model => model.Data_re)
+        <br />
+        <br />
+        <input type="submit" value="Добавить" />
+    </fieldset>
+}
+

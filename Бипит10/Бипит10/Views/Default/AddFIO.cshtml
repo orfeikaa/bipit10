@@ -1,0 +1,16 @@
+﻿@model FIO
+@{
+    ViewBag.Title = "AddFIO";
+}
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.LabelFor(model => model.FIO1, "ФИО")
+        <br />
+        @Html.EditorFor(model => model.FIO1)
+        <br />
+        <br />
+        <input type="submit" value="Добавить" />
+    </fieldset>
+}

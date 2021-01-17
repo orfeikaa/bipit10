@@ -1,0 +1,18 @@
+﻿@model FIO
+@{
+    ViewBag.Title = "EditFIO";
+}
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(m => m.FIO1, "ФИО")
+            <br />
+            @Html.EditorFor(m => m.FIO1)
+        </p>
+        <p><input type="submit" value="Редактировать" /></p>
+    </fieldset>
+}
+

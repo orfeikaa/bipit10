@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BIPIT3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Arenda">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id_fio" Type="Int32" />
+    <Property Name="Id_avto" Type="Int32" />
+    <Property Name="Data_take" Type="DateTime" Precision="0" />
+    <Property Name="Data_re" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Avto" Relationship="Self.FK_Arenda_Avto" FromRole="Arenda" ToRole="Avto" />
+    <NavigationProperty Name="FIO" Relationship="Self.FK_Arenda_FIO" FromRole="Arenda" ToRole="FIO" />
+  </EntityType>
+  <EntityType Name="Avto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Cost_avto" Type="Int32" />
+    <NavigationProperty Name="Arenda" Relationship="Self.FK_Arenda_Avto" FromRole="Avto" ToRole="Arenda" />
+  </EntityType>
+  <EntityType Name="FIO">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FIO1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Data" Type="DateTime" Precision="0" />
+    <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Arenda" Relationship="Self.FK_Arenda_FIO" FromRole="FIO" ToRole="Arenda" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Arenda_Avto">
+    <End Role="Avto" Type="Self.Avto" Multiplicity="0..1" />
+    <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Avto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Arenda">
+        <PropertyRef Name="Id_avto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Arenda_FIO">
+    <End Role="FIO" Type="Self.FIO" Multiplicity="0..1" />
+    <End Role="Arenda" Type="Self.Arenda" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FIO">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Arenda">
+        <PropertyRef Name="Id_fio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BIPIT3Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Arenda" EntityType="Self.Arenda" />
+    <EntitySet Name="Avto" EntityType="Self.Avto" />
+    <EntitySet Name="FIO" EntityType="Self.FIO" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_Arenda_Avto" Association="Self.FK_Arenda_Avto">
+      <End Role="Avto" EntitySet="Avto" />
+      <End Role="Arenda" EntitySet="Arenda" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Arenda_FIO" Association="Self.FK_Arenda_FIO">
+      <End Role="FIO" EntitySet="FIO" />
+      <End Role="Arenda" EntitySet="Arenda" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

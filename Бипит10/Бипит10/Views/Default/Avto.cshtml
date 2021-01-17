@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "AVTO";
+}
+
+<h2>Автомобили</h2>
+<div>
+    <table>
+        <tr>
+            <td>Код автомобиля</td>
+            <td>Автомобиль</td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td></td>
+                <td></td>
+            }
+        </tr>
+        @foreach (var i in ViewBag.Avto)
+        {
+            <tr>
+                <td>@i.Id</td>
+                <td>@i.Model</td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td> @Html.ActionLink("Редактировать", "EditAvto", new { Id = i.Id }) </td>
+                    <td>@Html.ActionLink("Удалить", "DeleteAvto", new { Id = i.Id }) </td>
+                }
+            </tr>
+        }
+    </table>
+    <br />
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Добавить", "AddAvto")
+    }
+</div>

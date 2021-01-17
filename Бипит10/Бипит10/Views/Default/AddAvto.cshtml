@@ -1,0 +1,17 @@
+﻿@model Avto
+@{
+    ViewBag.Title = "AddAvto";
+}
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.LabelFor(model => model.Model, "Автомобиль")
+        <br />
+        @Html.EditorFor(model => model.Model)
+        <br />
+        <br />
+        <input type="submit" value="Добавить" />
+    </fieldset>
+}
+

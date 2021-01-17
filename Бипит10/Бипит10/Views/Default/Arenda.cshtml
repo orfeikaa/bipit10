@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Arenda";
+}
+
+<h2>Аренда</h2>
+<div>
+    <table>
+        <tr>
+            <td>Код аренды</td>
+            <td>ФИО</td>
+            <td>Модель</td>
+            <td>Дата начало аренды</td>
+            <td>Дата конца аренды</td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td></td>
+                <td></td>
+            }
+        </tr>
+        @foreach (var i in ViewBag.Arenda)
+        {
+            <tr>
+                <td>@i.Id</td>
+                <td>@i.FIO.FIO1</td>
+                <td>@i.Avto.Model</td>
+                <td>@i.Data_take</td>
+                <td>@i.Data_re</td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <td> @Html.ActionLink("Редактировать", "EditArenda", new { Id = i.Id }) </td>
+                    <td>@Html.ActionLink("Удалить", "DeleteArenda", new { Id = i.Id }) </td>
+                }
+            </tr>
+        }
+    </table>
+    <br />
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Добавить", "AddArenda")
+    }
+</div>
